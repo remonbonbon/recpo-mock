@@ -9,6 +9,10 @@
   --bulma-link-l: 65%;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 ._hContainer {
   width: 100%;
   height: 100%;
@@ -23,12 +27,6 @@
   flex-flow: column;
 }
 
-._vCenter {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-}
-
 ._sidebar {
   width: 20rem;
   height: 100%;
@@ -40,13 +38,54 @@
   width: 100%;
   height: 100%;
 
-  padding: 1rem 0 0 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
-._linkOnHover:hover {
-  color: var(--bulma-link);
+._moveButtonGroup {
+  display: flex;
+  flex-flow: column;
+  width: 3rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+._moveButton {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+._moveButton:hover {
+  background-color: var(--bulma-link);
+}
+._moveButton:first-child {
+  border-top-left-radius: var(--bulma-card-radius);
+}
+._moveButton:last-child {
+  border-bottom-left-radius: var(--bulma-card-radius);
 }
 
-._dangerOnHover:hover {
-  color: var(--bulma-danger);
+._description {
+  max-height: 6em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+._trashButton {
+  cursor: pointer;
+  flex-shrink: 0;
+  border-top-right-radius: var(--bulma-card-radius);
+  border-bottom-right-radius: var(--bulma-card-radius);
+
+  display: flex;
+  align-items: center;
+}
+._trashButton:hover {
+  background-color: var(--bulma-danger);
+  color: #fff;
 }
