@@ -3,7 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      articles: _(ARTICLES).shuffle().take(10).value(),
+      articles: _(ARTICLES).shuffle().take(2).value(),
     };
   },
 }).mount("#app");

@@ -62,8 +62,14 @@
       <!-- ↑サイドバー -->
       <!-- ↓メインコンテンツ -->
       <main class="_main" id="app">
-        <div v-for="article in articles">
-          <figure class="image is-16by9" style="max-width: 320px">
+        <!-- 現在のレクリエーション -->
+        <div class="_hContainer card" v-for="(article, index) in articles">
+          <div class="_vCenter is-size-3 p-4">
+            <i class="fa-solid fa-caret-up _linkOnHover"></i>
+            <span>{{index}}</span>
+            <i class="fa-solid fa-caret-down _linkOnHover"></i>
+          </div>
+          <figure class="image is-16by9" style="min-width: 320px">
             <a
               v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
               target="_blank"
@@ -73,25 +79,33 @@
                 alt="Youtube"
             /></a>
           </figure>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <h4 class="title is-4">{{article.title}}</h4>
-                <h7 class="subtitle is-7">
-                  {{article.publishedAt}}
-                  <i class="fa-solid fa-heart ml-4"></i>
-                  {{article.likeCount?.toLocaleString()}}
-                  <i class="fa-solid fa-eye ml-4"></i>
-                  {{article.viewCount?.toLocaleString()}}
-                  <br />
-                  {{article.category}} | 人数 {{article.numOfPlayers}} | 時間
-                  {{article.howLong}}
-                </h7>
-              </div>
-            </div>
+          <div class="p-3" style="flex-grow: 1">
+            <h4 class="is-size-4">{{article.title}}</h4>
+            <h7 class="is-size-6">
+              {{article.publishedAt}}
+              <i class="fa-solid fa-heart ml-4"></i>
+              {{article.likeCount?.toLocaleString()}}
+              <i class="fa-solid fa-eye ml-4"></i>
+              {{article.viewCount?.toLocaleString()}}
+              <br />
+              {{article.category}} | 人数 {{article.numOfPlayers}} | 時間
+              {{article.howLong}}
+            </h7>
             <div class="content _article-description">
               {{article.description}}
             </div>
+          </div>
+          <div class="_vCenter _dangerOnHover is-size-3 p-4">
+            <i class="fa-solid fa-trash"></i>
+          </div>
+        </div>
+        <!-- レクリエーション追加ボタン -->
+        <div class="_hContainer">
+          <div class="_vCenter is-size-3 p-4">&nbsp;</div>
+          <div class="_vCenter">
+            <button class="button is-primary">
+              <i class="fa-solid fa-plus mr-2"></i>レクリエーションを追加
+            </button>
           </div>
         </div>
       </main>

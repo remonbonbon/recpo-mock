@@ -23,10 +23,15 @@
   flex-flow: column;
 }
 
+._vCenter {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
 ._sidebar {
   width: 20rem;
   height: 100%;
-  /* border: 1px solid blue; */
 
   padding: 1rem;
 }
@@ -34,5 +39,14 @@
 ._main {
   width: 100%;
   height: 100%;
-  /* border: 1px solid green; */
+
+  padding: 1rem 0 0 1rem;
+}
+
+._linkOnHover:hover {
+  color: var(--bulma-link);
+}
+
+._dangerOnHover:hover {
+  color: var(--bulma-danger);
 }
