@@ -17,10 +17,10 @@
       }
     </style>
   </head>
-  <body>
+  <body class="has-navbar-fixed-top">
     <!-- ↓ナビバー -->
     <nav
-      class="navbar is-primary"
+      class="navbar is-primary is-fixed-top"
       role="navigation"
       aria-label="main navigation"
     >
@@ -43,7 +43,7 @@
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
           <a class="navbar-item" href="./design.html"> レク企画 </a>
-          <a class="navbar-item has-text-weight-bold" href="./design.html">
+          <a class="navbar-item has-text-weight-bold" href="./search.html">
             レク検索
           </a>
         </div>
@@ -52,41 +52,82 @@
     <!-- ↑ナビバー -->
     <article class="_hContainer" id="app" v-cloak>
       <!-- ↓サイドバー -->
-      <div class="_sidebar">
+      <div class="_sidebar _search-controlls">
         <div class="field">
-          <span class="label">カテゴリー</span>
-          <div class="control" v-for="cat in categories">
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                v-bind:value="cat"
-                v-model="selectedCategories"
-              />{{cat}}</label
-            >
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="検索"
+              v-model="searchWord"
+            />
           </div>
         </div>
+        <hr />
         <div class="field">
-          <span class="label">参加人数</span>
-          <div class="control" v-for="players in playersList">
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                v-bind:value="players"
-                v-model="selectedPlayers"
-              />{{players}}</label
-            >
-          </div>
+          <details open class="_collapse">
+            <summary class="label _collapse-summary">カテゴリー</summary>
+            <div class="control" v-for="cat in categories">
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-bind:value="cat"
+                  v-model="selectedCategories"
+                />{{cat}}</label
+              >
+            </div>
+          </details>
         </div>
         <div class="field">
-          <span class="label">所要時間</span>
-          <div class="control" v-for="howLong in howLongList">
-            <label class="checkbox">
-              <input
-                type="checkbox"
-                v-bind:value="howLong"
-                v-model="selectedHowLong"
-              />{{howLong}}</label
+          <details open class="_collapse">
+            <summary class="label _collapse-summary">参加人数</summary>
+            <div class="control" v-for="players in playersList">
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-bind:value="players"
+                  v-model="selectedPlayers"
+                />{{players}}</label
+              >
+            </div>
+          </details>
+        </div>
+        <div class="field">
+          <details open class="_collapse">
+            <summary class="label _collapse-summary">所要時間</summary>
+            <div class="control" v-for="howLong in howLongList">
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-bind:value="howLong"
+                  v-model="selectedHowLong"
+                />{{howLong}}</label
+              >
+            </div>
+          </details>
+        </div>
+        <hr />
+        <div class="field">
+          <div class="control">
+            <label class="label mt-2 mr-2" style="display: inline-block"
+              >並べ替え</label
             >
+            <div class="select">
+              <select v-model="sortOption">
+                <option value="latest">最新</option>
+                <option value="like">評価</option>
+                <option value="view">閲覧数</option>
+                <option value="random">ランダム</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="field">
+          <div class="control">
+            <button class="button is-danger is-outlined" @click="resetSearch">
+              検索条件をリセット
+            </button>
           </div>
         </div>
       </div>
@@ -96,19 +137,6 @@
         <!-- 件数とか -->
         <div class="block">
           <div class="is-flex is-flex-direction-row">
-            <div class="control has-icons-left">
-              <div class="select is-rounded">
-                <select v-model="sortOption">
-                  <option value="latest">最新</option>
-                  <option value="like">評価</option>
-                  <option value="view">閲覧数</option>
-                  <option value="random">ランダム</option>
-                </select>
-              </div>
-              <div class="icon is-small is-left">
-                <i class="fa-solid fa-arrow-down-wide-short"></i>
-              </div>
-            </div>
             <div class="ml-3 mt-1">
               <span class="is-size-5">
                 <span v-if="searchWord">「{{searchWord}}」の検索結果</span>

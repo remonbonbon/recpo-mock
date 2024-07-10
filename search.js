@@ -58,4 +58,13 @@ createApp({
       return tmp;
     },
   },
+  methods: {
+    resetSearch() {
+      this.selectedCategories = [];
+      this.selectedPlayers = [];
+      this.selectedHowLong = [];
+      this.sortOption = "latest";
+      this.searchWord = "";
+    },
+  },
 }).mount("#app");

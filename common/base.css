@@ -7,6 +7,9 @@
   --bulma-link-h: 102deg;
   --bulma-link-s: 49%;
   --bulma-link-l: 65%;
+
+  --bulma-hr-height: 1px;
+  --bulma-hr-margin: 0.7rem 0;
 }
 
 ._hContainer {
@@ -25,9 +28,20 @@
 
 ._sidebar {
   width: 20rem;
-  height: 100%;
+  height: calc(100% - var(--bulma-navbar-height));
 
   padding: 1rem;
+
+  top: var(--bulma-navbar-height);
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: var(--bulma-navbar-fixed-z);
+  overflow-y: scroll;
+}
+.has-navbar-fixed-top {
+  /* サイドバーの幅ぶんだけbodyをずらす */
+  padding-left: 20rem;
 }
 
 ._main {

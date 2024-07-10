@@ -1,12 +1,30 @@
 input[type="checkbox"] {
   margin-right: 0.5rem;
 }
-._search-controlls {
-  margin-left: 0.5rem;
-}
 ._search-controlls .control {
   margin-left: 0.5rem;
 }
+
+._collapse ._collapse-summary {
+  cursor: pointer;
+  border-radius: var(--bulma-control-radius);
+  background-color: var(--bulma-border);
+  padding: 0.1rem 0.5rem;
+}
+._collapse:not([open]) ._collapse-summary {
+  border: 1px solid;
+  border-color: var(--bulma-border);
+}
+._collapse[open] {
+  border: 1px solid;
+  border-color: var(--bulma-border);
+  border-radius: var(--bulma-control-radius);
+}
+._collapse[open] ._collapse-summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 ._articles-grid {
   --bulma-grid-column-min: 18rem;
 }
