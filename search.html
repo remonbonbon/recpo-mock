@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/bulma-1.0.1/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/fontawesome-6.5.2/css/solid.min.css" />
+    <link rel="stylesheet" href="common/base.css" />
+    <link rel="stylesheet" href="search.css" />
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ↓ナビバー -->
+    <nav
+      class="navbar is-primary"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">Test mock</a>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="./design.html"> レク企画 </a>
+          <a class="navbar-item has-text-weight-bold" href="./design.html">
+            レク検索
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- ↑ナビバー -->
+    <article class="_hContainer" id="app" v-cloak>
+      <!-- ↓サイドバー -->
+      <div class="_sidebar">
+        <div class="field">
+          <span class="label">カテゴリー</span>
+          <div class="control" v-for="cat in categories">
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                v-bind:value="cat"
+                v-model="selectedCategories"
+              />{{cat}}</label
+            >
+          </div>
+        </div>
+        <div class="field">
+          <span class="label">参加人数</span>
+          <div class="control" v-for="players in playersList">
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                v-bind:value="players"
+                v-model="selectedPlayers"
+              />{{players}}</label
+            >
+          </div>
+        </div>
+        <div class="field">
+          <span class="label">所要時間</span>
+          <div class="control" v-for="howLong in howLongList">
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                v-bind:value="howLong"
+                v-model="selectedHowLong"
+              />{{howLong}}</label
+            >
+          </div>
+        </div>
+      </div>
+      <!-- ↑サイドバー -->
+      <!-- ↓メインコンテンツ -->
+      <main class="_main">
+        <!-- 件数とか -->
+        <div class="block">
+          <div class="is-flex is-flex-direction-row">
+            <div class="control has-icons-left">
+              <div class="select is-rounded">
+                <select v-model="sortOption">
+                  <option value="latest">最新</option>
+                  <option value="like">評価</option>
+                  <option value="view">閲覧数</option>
+                  <option value="random">ランダム</option>
+                </select>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fa-solid fa-arrow-down-wide-short"></i>
+              </div>
+            </div>
+            <div class="ml-3 mt-1">
+              <span class="is-size-5">
+                <span v-if="searchWord">「{{searchWord}}」の検索結果</span>
+                <span v-else>全</span> {{articles.length}} 件
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- 一覧 -->
+        <div class="grid _articles-grid">
+          <div class="cell _articles-cell" v-for="(article, index) in articles">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-16by9">
+                  <a
+                    v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><img
+                      v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
+                      alt="Youtube"
+                  /></a>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <h4 class="title is-4">{{article.title}}</h4>
+                    <h7 class="subtitle is-7">
+                      {{article.publishedAt}}
+                      <i class="fa-solid fa-heart ml-4"></i>
+                      {{article.likeCount.toLocaleString()}}
+                      <i class="fa-solid fa-eye ml-4"></i>
+                      {{article.viewCount.toLocaleString()}}
+                      <br />
+                      {{article.category}} | 人数 {{article.numOfPlayers}} |
+                      時間 {{article.howLong}}
+                    </h7>
+                  </div>
+                </div>
+                <div class="content _article-description">
+                  {{article.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- ↑メインコンテンツ -->
+    </article>
+    <script src="assets/vue-3.4.31/vue.global.prod.js"></script>
+    <script src="assets/lodash-4.17.15/lodash.min.js"></script>
+    <script src="common/navbar.js"></script>
+    <script src="common/data.js"></script>
+    <script src="search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+._search-controlls {
+  margin-left: 0.5rem;
+}
+._search-controlls .control {
+  margin-left: 0.5rem;
+}
+._articles-grid {
+  --bulma-grid-column-min: 18rem;
+}
+._articles-cell {
+  max-width: 25rem;
+}
+._article-description {
+  max-height: 6em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}

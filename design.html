@@ -9,8 +9,13 @@
       href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
     />
     <link rel="stylesheet" href="assets/fontawesome-6.5.2/css/solid.min.css" />
-    <link href="common/base.css" rel="stylesheet" />
-    <link href="design/design.css" rel="stylesheet" />
+    <link rel="stylesheet" href="common/base.css" />
+    <link rel="stylesheet" href="design.css" />
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <!-- ↓ナビバー -->
@@ -40,7 +45,7 @@
           <a class="navbar-item has-text-weight-bold" href="./design.html">
             レク企画
           </a>
-          <a class="navbar-item"> レク検索 </a>
+          <a class="navbar-item" href="./search.html"> レク検索 </a>
         </div>
       </div>
     </nav>
@@ -92,9 +97,9 @@
             <h7 class="is-size-6">
               {{article.publishedAt}}
               <i class="fa-solid fa-heart ml-4"></i>
-              {{article.likeCount?.toLocaleString()}}
+              {{article.likeCount.toLocaleString()}}
               <i class="fa-solid fa-eye ml-4"></i>
-              {{article.viewCount?.toLocaleString()}}
+              {{article.viewCount.toLocaleString()}}
               <br />
               {{article.category}} | 人数 {{article.numOfPlayers}} | 時間
               {{article.howLong}}
@@ -112,6 +117,6 @@
     <script src="assets/lodash-4.17.15/lodash.min.js"></script>
     <script src="common/navbar.js"></script>
     <script src="common/data.js"></script>
-    <script src="design/design.js"></script>
+    <script src="design.js"></script>
   </body>
 </html>
