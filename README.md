@@ -1,7 +1,1 @@
-### Run
-
-```bash
-$ python -m http.server 9999
-
-Open http://localhost:9999
-```
+Completely OFFLINE mock pages w/o YouTube thumbnail
