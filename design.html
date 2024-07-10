@@ -64,13 +64,16 @@
       <main class="_main" id="app" v-cloak>
         <!-- 現在のレクリエーション -->
         <div class="_hContainer card" v-for="(article, index) in articles">
-          <div class="_moveButtonGroup is-size-3">
-            <div class="_moveButton">
-              <i class="fa-solid fa-caret-up"></i>
+          <div class="_moveButtonGroup is-size-4">
+            <div class="_moveButton" v-bind:class="{enabled:0 < index}">
+              <i class="fa-solid fa-chevron-up"></i>
             </div>
-            <div class="">{{index}}</div>
-            <div class="_moveButton">
-              <i class="fa-solid fa-caret-down"></i>
+            <div class="">{{index + 1}}</div>
+            <div
+              class="_moveButton"
+              v-bind:class="{enabled:index < articles.length-1}"
+            >
+              <i class="fa-solid fa-chevron-down"></i>
             </div>
           </div>
           <figure class="image is-16by9" style="width: 20rem; flex-shrink: 0">
@@ -97,17 +100,8 @@
             </h7>
             <div class="_description">{{article.description}}</div>
           </div>
-          <div class="_trashButton is-size-3 p-6">
+          <div class="_trashButton is-size-4 p-4">
             <i class="fa-solid fa-trash"></i>
-          </div>
-        </div>
-        <!-- レクリエーション追加ボタン -->
-        <div class="_hContainer">
-          <div class="is-size-3 p-4">&nbsp;</div>
-          <div>
-            <button class="button is-primary">
-              <i class="fa-solid fa-plus mr-2"></i>レクリエーションを追加
-            </button>
           </div>
         </div>
       </main>

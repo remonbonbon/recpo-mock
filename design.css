@@ -2,8 +2,8 @@
   --family-sans-serif: "YakuHanJPs", "Roboto", "Hiragino Kaku Gothic ProN",
     "ヒラギノ角ゴ ProN W3", Arial, "nc3Jp", sans-serif;
 
-  --bulma-primary-h: 46deg;
-  --bulma-primary-l: 70%;
+  --bulma-primary-h: 40deg;
+  --bulma-primary-l: 78%;
   --bulma-link-h: 102deg;
   --bulma-link-s: 49%;
   --bulma-link-l: 65%;
@@ -56,8 +56,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  visibility: hidden;
 }
-._moveButton:hover {
+._moveButton.enabled {
+  visibility: initial;
+}
+._moveButton.enabled:hover {
   background-color: var(--bulma-link);
 }
 ._moveButton:first-child {
