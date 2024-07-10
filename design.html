@@ -3,10 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/bulma-1.0.1/css/bulma.min.css" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"
+      href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
     />
+    <link rel="stylesheet" href="assets/fontawesome-6.5.2/css/solid.min.css" />
     <link href="design.css" rel="stylesheet" />
   </head>
   <body>
@@ -34,7 +36,9 @@
       </div>
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
-          <a class="navbar-item has-text-weight-bold"> レク企画 </a>
+          <a class="navbar-item has-text-weight-bold" href="./design.html">
+            レク企画
+          </a>
           <a class="navbar-item"> レク一覧 </a>
         </div>
       </div>
@@ -57,9 +61,46 @@
       </div>
       <!-- ↑サイドバー -->
       <!-- ↓メインコンテンツ -->
-      <main class="_main">メインコンテンツ</main>
+      <main class="_main" id="app">
+        <div v-for="article in articles">
+          <figure class="image is-16by9" style="max-width: 320px">
+            <a
+              v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><img
+                v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
+                alt="Youtube"
+            /></a>
+          </figure>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <h4 class="title is-4">{{article.title}}</h4>
+                <h7 class="subtitle is-7">
+                  {{article.publishedAt}}
+                  <i class="fa-solid fa-heart ml-4"></i>
+                  {{article.likeCount?.toLocaleString()}}
+                  <i class="fa-solid fa-eye ml-4"></i>
+                  {{article.viewCount?.toLocaleString()}}
+                  <br />
+                  {{article.category}} | 人数 {{article.numOfPlayers}} | 時間
+                  {{article.howLong}}
+                </h7>
+              </div>
+            </div>
+            <div class="content _article-description">
+              {{article.description}}
+            </div>
+          </div>
+        </div>
+      </main>
       <!-- ↑メインコンテンツ -->
     </article>
+    <script src="navbar.js"></script>
+    <script src="assets/vue-3.4.31/vue.global.prod.js"></script>
+    <script src="assets/lodash-4.17.15/lodash.min.js"></script>
+    <script src="data.js"></script>
     <script src="design.js"></script>
   </body>
 </html>
