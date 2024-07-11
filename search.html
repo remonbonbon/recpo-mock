@@ -9,6 +9,10 @@
       href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
     />
     <link rel="stylesheet" href="assets/fontawesome-6.5.2/css/solid.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/fontawesome-6.5.2/css/regular.min.css"
+    />
     <link rel="stylesheet" href="common/base.css" />
     <link rel="stylesheet" href="search.css" />
     <style>
@@ -87,7 +91,15 @@
         </div>
         <div class="field" v-for="group in tagGroups">
           <details open class="_collapse">
-            <summary class="label _collapse-summary">{{ group }}</summary>
+            <summary class="label _collapse-summary">
+              <span class="_collapse-summaryIcon-open"
+                ><i class="fa-solid fa-angle-down"></i
+              ></span>
+              <span class="_collapse-summaryIcon-close"
+                ><i class="fa-solid fa-angle-right"></i
+              ></span>
+              <span class="_collapse-summaryTitle">{{ group }}</span>
+            </summary>
             <div class="_collapse-details">
               <div
                 class="control"
@@ -166,6 +178,12 @@
                 </div>
                 <div class="content _article-description">
                   {{article.description}}
+                </div>
+                <div class="_article-actions">
+                  <span class="_favButton"
+                    ><i class="fa-regular fa-heart"></i
+                  ></span>
+                  <button class="button is-primary">レク企画に追加</button>
                 </div>
               </div>
             </div>
