@@ -14,12 +14,16 @@ createApp({
     articles() {
       let tmp = ARTICLES;
       if (this.searchWord) {
-        tmp = tmp.filter(
-          (a) =>
-            a.title?.includes(this.searchWord) ||
-            a.description?.includes(this.searchWord) ||
-            a.detail?.includes(this.searchWord)
-        );
+        const words = this.searchWord.trim().split(/\s/);
+        for (const w of words) {
+          tmp = tmp.filter(
+            (a) =>
+              a.title?.includes(w) ||
+              a.description?.includes(w) ||
+              a.detail?.includes(w) ||
+              a.tags.some((tag) => (tag.group + ":" + tag.name).includes(w))
+          );
+        }
       }
       if (0 < this.selectedTags.length) {
         const selectedTagsByGroup = _.groupBy(this.selectedTags, "group");

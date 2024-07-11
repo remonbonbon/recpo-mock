@@ -10,6 +10,8 @@
 
   --bulma-hr-height: 1px;
   --bulma-hr-margin: 0.7rem 0;
+
+  --bulma-block-spacing: 1rem;
 }
 
 ._hContainer {

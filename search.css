@@ -24,6 +24,9 @@ input[type="checkbox"] {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+._collapse-details {
+  padding: 0 0.1rem 0.2rem 0.1rem;
+}
 
 ._articles-grid {
   --bulma-grid-column-min: 18rem;

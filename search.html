@@ -80,17 +80,28 @@
           </div>
         </div>
         <hr />
+        <div class="field">
+          <div class="control">
+            <div class="label">タグで検索</div>
+          </div>
+        </div>
         <div class="field" v-for="group in tagGroups">
           <details open class="_collapse">
             <summary class="label _collapse-summary">{{ group }}</summary>
-            <div class="control" v-for="tag in tagsByGroup[group]">
-              <label class="checkbox">
-                <input
-                  type="checkbox"
-                  v-bind:value="tag"
-                  v-model="selectedTags"
-                />{{tag.name}}</label
+            <div class="_collapse-details">
+              <div
+                class="control"
+                v-for="tag in tagsByGroup[group]"
+                style="display: inline-block"
               >
+                <label class="checkbox">
+                  <input
+                    type="checkbox"
+                    v-bind:value="tag"
+                    v-model="selectedTags"
+                  />{{tag.name}}</label
+                >
+              </div>
             </div>
           </details>
         </div>
@@ -111,7 +122,9 @@
           <div class="is-flex is-flex-direction-row">
             <div class="ml-3 mt-1">
               <span class="is-size-5">
-                <span v-if="searchWord">「{{searchWord}}」の検索結果</span>
+                <span v-if="searchWord"
+                  >「{{ searchWord.trim() }}」の検索結果</span
+                >
                 <span v-else>全</span> {{articles.length}} 件
               </span>
             </div>
