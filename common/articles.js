@@ -2154,8 +2154,26 @@ const ARTICLES = [
   },
 ];
 
-// サンプル用にランダムに人気度などを設定する
 for (const a of ARTICLES) {
+  // ランダムに人気度などを設定する
   a.likeCount = _.random(10, 10000);
   a.viewCount = _.random(10, 1000000);
+
+  // ランダムにタグを設定する
+  a.tags = [];
+
+  a.tags.push(_.sample(TAGS_BY_GROUP["ジャンル"]));
+  a.tags.push(_.sample(TAGS_BY_GROUP["流れ"]));
+  a.tags.push(_.sample(TAGS_BY_GROUP["難易度"]));
+  a.tags.push(_.sample(TAGS_BY_GROUP[_.sample(["介護度", "認知症", "障害"])]));
+  a.tags.push(_.sample(TAGS_BY_GROUP["人数"]));
+  a.tags.push(_.sample(TAGS_BY_GROUP["時間"]));
+  a.tags.push(
+    _.sample(
+      TAGS_BY_GROUP[_.sample(["準備", "運動対象", "スペース", "スタッフ数"])]
+    )
+  );
+  a.tags.push(_.sample(TAGS_BY_GROUP[_.sample(["目的", "季節", "イベント"])]));
+
+  a.tags = _.sortBy(a.tags, "id");
 }

@@ -100,10 +100,12 @@
               {{article.likeCount.toLocaleString()}}
               <i class="fa-solid fa-eye ml-4"></i>
               {{article.viewCount.toLocaleString()}}
-              <br />
-              {{article.category}} | 人数 {{article.numOfPlayers}} | 時間
-              {{article.howLong}}
             </h7>
+            <div>
+              <span class="tag is-link mr-1" v-for="tag in article.tags"
+                >{{ tag.group }}:{{ tag.name }}</span
+              >
+            </div>
             <div class="_description">{{article.description}}</div>
           </div>
           <div class="_trashButton is-size-4 p-4">
@@ -116,7 +118,8 @@
     <script src="assets/vue-3.4.31/vue.global.prod.js"></script>
     <script src="assets/lodash-4.17.15/lodash.min.js"></script>
     <script src="common/navbar.js"></script>
-    <script src="common/data.js"></script>
+    <script src="common/tags.js"></script>
+    <script src="common/articles.js"></script>
     <script src="design.js"></script>
   </body>
 </html>
