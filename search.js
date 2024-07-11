@@ -3,22 +3,9 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      categories: _(ARTICLES)
-        .map((a) => a.category)
-        .uniq()
-        .value(),
-      playersList: _(ARTICLES)
-        .map((a) => a.numOfPlayers)
-        .uniq()
-        .sortBy((p) => parseInt(p, 10) || 0)
-        .value(),
-      howLongList: _(ARTICLES)
-        .map((a) => a.howLong)
-        .uniq()
-        .value(),
-      selectedCategories: [],
-      selectedPlayers: [],
-      selectedHowLong: [],
+      tagGroups: TAG_GROUPS,
+      tagsByGroup: TAGS_BY_GROUP,
+      selectedTags: [],
       sortOption: "latest",
       searchWord: "",
     };
@@ -34,14 +21,14 @@ createApp({
             a.detail?.includes(this.searchWord)
         );
       }
-      if (0 < this.selectedCategories.length) {
-        tmp = tmp.filter((a) => this.selectedCategories.includes(a.category));
-      }
-      if (0 < this.selectedPlayers.length) {
-        tmp = tmp.filter((a) => this.selectedPlayers.includes(a.numOfPlayers));
-      }
-      if (0 < this.selectedHowLong.length) {
-        tmp = tmp.filter((a) => this.selectedHowLong.includes(a.howLong));
+      if (0 < this.selectedTags.length) {
+        const selectedTagsByGroup = _.groupBy(this.selectedTags, "group");
+        // 同タググループ内はOR、異なるタググループ間はAND条件でフィルタリング
+        for (const sTags of Object.values(selectedTagsByGroup)) {
+          tmp = tmp.filter((a) =>
+            a.tags.some((t1) => sTags.some((t2) => t1.id === t2.id))
+          );
+        }
       }
       if (this.sortOption === "latest") {
         tmp = _.orderBy(tmp, "publishedAt", "desc");
@@ -60,9 +47,7 @@ createApp({
   },
   methods: {
     resetSearch() {
-      this.selectedCategories = [];
-      this.selectedPlayers = [];
-      this.selectedHowLong = [];
+      this.selectedTags = [];
       this.sortOption = "latest";
       this.searchWord = "";
     },
