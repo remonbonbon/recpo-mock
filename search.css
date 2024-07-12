@@ -1,78 +1,87 @@
-input[type="checkbox"] {
-  margin-right: 0.5rem;
-}
-._search-controlls .control {
-  margin-left: 0.5rem;
+.collapseContainer {
+  margin-top: 0.5rem;
 }
 
-._collapse ._collapse-summary {
+.collapse-summary {
   cursor: pointer;
-  border-radius: var(--bulma-control-radius);
-  background-color: var(--bulma-border);
+  border-radius: var(--border-radius);
+  background-color: transparent;
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
 
   display: inline-flex;
   width: 100%;
 }
-._collapse:not([open]) ._collapse-summary {
-  border: 1px solid;
-  border-color: var(--bulma-border);
+.collapse-summary:hover {
+  background-color: var(--border-color);
 }
-._collapse[open] {
+.collapse:not([open]) .collapse-summary {
   border: 1px solid;
-  border-color: var(--bulma-border);
-  border-radius: var(--bulma-control-radius);
+  border-color: var(--border-color);
 }
-._collapse[open] ._collapse-summary {
+.collapse[open] {
+  border: 1px solid;
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+}
+.collapse[open] .collapse-summary {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 
   padding-bottom: 1px; /* borderの太さぶん */
 }
-._collapse-summaryIcon-open,
-._collapse-summaryIcon-close {
+.collapse-summaryIcon_open,
+.collapse-summaryIcon_close {
   margin-left: 0.5rem;
 }
-._collapse[open] ._collapse-summaryIcon-close {
+.collapse[open] .collapse-summaryIcon_close {
   display: none;
 }
-._collapse-summaryIcon-open {
+.collapse-summaryIcon_open {
   display: none;
 }
-._collapse[open] ._collapse-summaryIcon-open {
+.collapse[open] .collapse-summaryIcon_open {
   display: inline;
 }
-._collapse-summaryTitle {
+.collapse-summaryTitle {
   margin-left: 0.5rem;
 }
-._collapse-details {
-  padding: 0 0.1rem 0.2rem 0.1rem;
+.collapse-details {
+  padding: 0.3rem;
 }
 
-._articles-grid {
-  --bulma-grid-column-min: 20rem;
+/* 一覧 */
+.articlesListHeader {
+  padding: 0 1rem;
+  font-size: var(--text-size5);
 }
-._articles-cell {
-  max-width: 27rem;
+.articlesList {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 2rem 1rem;
 }
-._article-description {
-  max-height: 6em;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
+.articlesList-item {
+  max-width: 25rem;
 }
 
-._article-actions {
+.articleActions {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
 }
-._article-actions ._favButton {
-  font-size: 1.5em;
+.favButton {
+  appearance: none;
+  border: none;
+  outline: none;
   cursor: pointer;
+  background-color: transparent;
+
+  font-size: 1.5em;
 }
-._article-actions ._favButton:hover {
-  color: var(--bulma-danger);
+.favButton:hover,
+.favButton:focus {
+  color: var(--color-danger);
 }

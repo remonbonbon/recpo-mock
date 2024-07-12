@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/bulma-1.0.1/css/bulma.min.css" />
     <link
       rel="stylesheet"
       href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
@@ -13,6 +12,7 @@
       rel="stylesheet"
       href="assets/fontawesome-6.5.2/css/regular.min.css"
     />
+    <link rel="stylesheet" href="common/reset.css" />
     <link rel="stylesheet" href="common/base.css" />
     <link rel="stylesheet" href="search.css" />
     <style>
@@ -21,172 +21,129 @@
       }
     </style>
   </head>
-  <body class="has-navbar-fixed-top">
+  <body class="body">
     <!-- ↓ナビバー -->
-    <nav
-      class="navbar is-primary is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="#">Test mock</a>
-
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navMenu"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+    <nav class="navbar">
+      <div>
+        <span class="navbar-item"> Test mock </span>
       </div>
-      <div class="navbar-menu" id="navMenu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="./design.html"> レク企画 </a>
-          <a class="navbar-item has-text-weight-bold" href="./search.html">
-            レク検索
-          </a>
-        </div>
+      <div>
+        <a class="navbar-item" href="./design.html"> レク企画 </a>
+      </div>
+      <div>
+        <a class="navbar-item active" href="./search.html"> レク検索 </a>
       </div>
     </nav>
     <!-- ↑ナビバー -->
-    <article class="_hContainer" id="app" v-cloak>
+    <article id="app" v-cloak>
       <!-- ↓サイドバー -->
-      <div class="_sidebar _search-controlls">
-        <div class="field">
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="検索"
-              v-model="searchWord"
-            />
-          </div>
+      <aside class="sidebar">
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="検索"
+            v-model="searchWord"
+          />
         </div>
         <hr />
-        <div class="field">
-          <div class="control">
-            <label class="label mt-2 mr-2" style="display: inline-block"
-              >並べ替え</label
-            >
-            <div class="select">
-              <select v-model="sortOption">
-                <option value="latest">最新</option>
-                <option value="like">評価</option>
-                <option value="view">閲覧数</option>
-                <option value="random">ランダム</option>
-              </select>
-            </div>
-          </div>
+        <div class="control">
+          <span class="label">並べ替え</span>
+          <select class="select" v-model="sortOption">
+            <option value="latest">最新</option>
+            <option value="like">評価</option>
+            <option value="view">閲覧数</option>
+            <option value="random">ランダム</option>
+          </select>
         </div>
         <hr />
-        <div class="field">
-          <div class="control">
-            <div class="label">タグで検索</div>
-          </div>
+        <div class="control">
+          <div class="label">タグで検索</div>
         </div>
-        <div class="field" v-for="group in tagGroups">
-          <details open class="_collapse">
-            <summary class="label _collapse-summary">
-              <span class="_collapse-summaryIcon-open"
-                ><i class="fa-solid fa-angle-down"></i
-              ></span>
-              <span class="_collapse-summaryIcon-close"
-                ><i class="fa-solid fa-angle-right"></i
-              ></span>
-              <span class="_collapse-summaryTitle">{{ group }}</span>
-            </summary>
-            <div class="_collapse-details">
-              <div
-                class="control"
-                v-for="tag in tagsByGroup[group]"
-                style="display: inline-block"
-              >
-                <label class="checkbox">
-                  <input
-                    type="checkbox"
-                    v-bind:value="tag"
-                    v-model="selectedTags"
-                  />{{tag.name}}</label
-                >
+        <div class="collapseContainer vBetweenSpace">
+          <div class="control" v-for="group in tagGroups">
+            <details open class="collapse">
+              <summary class="label collapse-summary">
+                <span class="collapse-summaryIcon_open"
+                  ><i class="fa-solid fa-angle-down"></i
+                ></span>
+                <span class="collapse-summaryIcon_close"
+                  ><i class="fa-solid fa-angle-right"></i
+                ></span>
+                <span class="collapse-summaryTitle">{{ group }}</span>
+              </summary>
+              <div class="collapse-details checkboxes">
+                <div class="checkbox" v-for="tag in tagsByGroup[group]">
+                  <label>
+                    <input
+                      type="checkbox"
+                      v-bind:value="tag"
+                      v-model="selectedTags"
+                    />{{tag.name}}</label
+                  >
+                </div>
               </div>
-            </div>
-          </details>
-        </div>
-        <hr />
-        <div class="field">
-          <div class="control">
-            <button class="button is-danger is-outlined" @click="resetSearch">
-              検索条件をリセット
-            </button>
+            </details>
           </div>
         </div>
-      </div>
+        <hr />
+        <div>
+          <button class="button danger outline" @click="resetSearch">
+            検索条件をリセット
+          </button>
+        </div>
+      </aside>
       <!-- ↑サイドバー -->
       <!-- ↓メインコンテンツ -->
-      <main class="_main">
+      <main class="main">
         <!-- 件数とか -->
-        <div class="block">
-          <div class="is-flex is-flex-direction-row">
-            <div class="ml-3 mt-1">
-              <span class="is-size-5">
-                <span v-if="searchWord"
-                  >「{{ searchWord.trim() }}」の検索結果</span
-                >
-                <span v-else>全</span> {{articles.length}} 件
-              </span>
-            </div>
-          </div>
+        <div class="articlesListHeader">
+          <span v-if="searchWord">「{{ searchWord.trim() }}」の検索結果</span>
+          <span v-else>全</span> {{articles.length}} 件
         </div>
         <!-- 一覧 -->
-        <div class="grid _articles-grid">
-          <div class="cell _articles-cell" v-for="(article, index) in articles">
+        <div class="articlesList">
+          <div class="articlesList-item" v-for="(article, index) in articles">
             <div class="card">
               <div class="card-image">
-                <figure class="image is-16by9">
+                <figure class="image_16x9">
                   <a
                     v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
                     target="_blank"
                     rel="noopener noreferrer"
                     ><img
+                      class="image"
                       v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
                       alt="YouTube"
                   /></a>
                 </figure>
               </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h4 class="title is-4">{{article.title}}</h4>
-                    <h7 class="subtitle is-7">
-                      {{article.publishedAt}}
-                      <i class="fa-solid fa-heart ml-4"></i>
-                      {{article.likeCount.toLocaleString()}}
-                      <i class="fa-solid fa-eye ml-4"></i>
-                      {{article.viewCount.toLocaleString()}}
-                    </h7>
-                    <div>
-                      <a
-                        class="tag is-link mr-1"
-                        v-for="tag in article.tags"
-                        @click="toggleSearchTag(tag)"
-                        >{{ tag.group }}:{{ tag.name }}</a
-                      >
-                    </div>
+              <div class="card-content vBetweenSpace">
+                <div>
+                  <h4 class="text-4">{{article.title}}</h4>
+                  <h7 class="text-small">
+                    {{article.publishedAt}}
+                    <i class="fa-solid fa-heart" style="margin-left: 1rem"></i>
+                    {{article.likeCount.toLocaleString()}}
+                    <i class="fa-solid fa-eye" style="margin-left: 1rem"></i>
+                    {{article.viewCount.toLocaleString()}}
+                  </h7>
+                  <div class="tags">
+                    <button
+                      class="tag secondary"
+                      v-for="tag in article.tags"
+                      @click="toggleSearchTag(tag)"
+                    >
+                      {{ tag.group }}:{{ tag.name }}
+                    </button>
                   </div>
                 </div>
-                <div class="content _article-description">
-                  {{article.description}}
-                </div>
-                <div class="_article-actions">
-                  <span class="_favButton"
-                    ><i class="fa-regular fa-heart"></i
-                  ></span>
-                  <button class="button is-primary">レク企画に追加</button>
+                <div class="clampLine-4">{{article.description}}</div>
+                <div class="articleActions">
+                  <button class="favButton">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                  <button class="button primary">レク企画に追加</button>
                 </div>
               </div>
             </div>
@@ -197,7 +154,6 @@
     </article>
     <script src="assets/vue-3.4.31/vue.global.prod.js"></script>
     <script src="assets/lodash-4.17.15/lodash.min.js"></script>
-    <script src="common/navbar.js"></script>
     <script src="common/tags.js"></script>
     <script src="common/articles.js"></script>
     <script src="search.js"></script>

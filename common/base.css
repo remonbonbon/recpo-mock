@@ -1,54 +1,343 @@
 :root {
-  --family-sans-serif: "YakuHanJPs", "Roboto", "Hiragino Kaku Gothic ProN",
-    "ヒラギノ角ゴ ProN W3", Arial, "nc3Jp", sans-serif;
+  --font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ,
+    Meiryo, "ＭＳ Ｐゴシック", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-weight-bold: 600;
 
-  --bulma-primary-h: 40deg;
-  --bulma-primary-l: 78%;
-  --bulma-link-h: 102deg;
-  --bulma-link-s: 40%;
-  --bulma-link-l: 60%;
+  --navbar-height: 2.5rem;
+  --navbar-z: 1000;
+  --sidebar-width: 20rem;
 
-  --bulma-hr-height: 1px;
-  --bulma-hr-margin: 0.7rem 0;
+  --color-text: hsl(221deg, 14%, 29%);
+  --color-bg: #fff;
 
-  --bulma-block-spacing: 1rem;
+  --color-primary-h: 40deg;
+  --color-primary-s: 100%;
+  --color-primary-l: 78%;
+  --color-primary: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    var(--color-primary-l)
+  );
+  --color-primary-hover: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    60%
+  );
+
+  --color-secondary-h: 102deg;
+  --color-secondary-s: 40%;
+  --color-secondary-l: 60%;
+  --color-secondary: hsl(
+    var(--color-secondary-h),
+    var(--color-secondary-s),
+    var(--color-secondary-l)
+  );
+  --color-secondary-hover: hsl(
+    var(--color-secondary-h),
+    var(--color-secondary-s),
+    45%
+  );
+
+  --color-danger-h: 348deg;
+  --color-danger-s: 100%;
+  --color-danger-l: 70%;
+  --color-danger: hsl(
+    var(--color-danger-h),
+    var(--color-danger-s),
+    var(--color-danger-l)
+  );
+  --color-danger-hover: hsl(var(--color-danger-h), var(--color-danger-s), 60%);
+
+  --border-radius: 0.75rem;
+  --border-color: #ddd;
+
+  --transition-duration: 300ms;
+  --control-placeholder: #aaa;
+  --focus-shadow: hsla(
+      var(--color-secondary-h),
+      var(--color-secondary-s),
+      var(--color-secondary-l),
+      0.4
+    )
+    0 0 0 5px;
+
+  --text-size6: 1rem;
+  --text-size5: calc(var(--text-size6) * 1.2);
+  --text-size4: calc(var(--text-size5) * 1.2);
+  --text-size3: calc(var(--text-size4) * 1.2);
+  --text-size2: calc(var(--text-size3) * 1.2);
+  --text-size1: calc(var(--text-size2) * 1.2);
+  --text-small: 0.75rem;
 }
 
-._hContainer {
-  width: 100%;
+/* 全体 */
+body {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
+  line-height: 1.5;
+}
+.body {
+  padding-top: var(--navbar-height);
+  padding-left: var(--sidebar-width);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ナビバー */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--navbar-z);
+  height: var(--navbar-height);
+
+  display: flex;
+
+  background-color: var(--color-primary);
+}
+.navbar-item {
   height: 100%;
   display: flex;
-  flex-flow: row;
+  align-items: center;
+  color: inherit;
+  padding: 0 1rem;
+
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
+}
+a.navbar-item:hover,
+a.navbar-item:focus {
+  background-color: var(--color-primary-hover);
+}
+.navbar-item.active {
+  font-weight: var(--font-weight-bold);
 }
 
-._vContainer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-}
-
-._sidebar {
-  width: 20rem;
-  height: calc(100% - var(--bulma-navbar-height));
+/* サイドバー */
+.sidebar {
+  width: var(--sidebar-width);
+  height: calc(100% - var(--navbar-height));
 
   padding: 1rem;
 
-  top: var(--bulma-navbar-height);
-  left: 0;
   position: fixed;
-  right: 0;
-  z-index: var(--bulma-navbar-fixed-z);
+  top: var(--navbar-height);
+  left: 0;
   overflow-y: scroll;
 }
-.has-navbar-fixed-top {
-  /* サイドバーの幅ぶんだけbodyをずらす */
-  padding-left: 20rem;
-}
 
-._main {
+/* メインコンテンツ */
+.main {
   width: 100%;
   height: 100%;
 
   padding: 1rem 1rem 0 1rem;
+}
+
+/* 汎用レイアウト */
+.vBetweenSpace {
+  display: flex;
+  flex-flow: column;
+  gap: 0.75rem;
+}
+.hBetweenSpace {
+  display: flex;
+  flex-flow: row;
+  gap: 0.75rem;
+}
+
+/* ボタン */
+.button {
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+
+  padding: 0.5em 0.75em;
+  cursor: pointer;
+
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
+}
+.button.primary {
+  background-color: var(--color-primary);
+}
+.button.primary:hover,
+.button.primary:focus {
+  background-color: var(--color-primary-hover);
+}
+.button.danger.outline {
+  background-color: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.button.danger.outline:hover,
+.button.danger.outline:focus {
+  outline: 1px solid var(--color-danger-hover);
+}
+
+/* コントロール */
+.input,
+.select {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+
+  transition-duration: var(--transition-duration);
+  transition-property: border-color, box-shadow;
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: var(--focus-shadow);
+}
+::placeholder {
+  color: var(--control-placeholder);
+}
+.input {
+  width: 100%;
+  padding: 0.5em 0.75em;
+}
+.select {
+  padding: 0.25em 0.5em;
+  margin: 0 0.5rem;
+}
+label {
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  margin-right: 0.2rem;
+}
+.checkboxes {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.checkbox {
+  display: inline-block;
+  font-size: 0.9rem;
+
+  border-radius: var(--border-radius);
+  transition-duration: var(--transition-duration);
+  transition-property: border-color, box-shadow;
+}
+.checkbox:hover,
+.checkbox:has(input[type="checkbox"]:focus) {
+  box-shadow: var(--focus-shadow);
+}
+
+/* コントロールのコンテナ */
+.control .label {
+  font-weight: var(--font-weight-bold);
+}
+
+/* カード */
+.card {
+  box-shadow: 0 0.5em 1em -0.125em hsla(0, 15%, 5%, 0.1),
+    0 0px 0 1px hsla(0, 15%, 5%, 0.02);
+  border-radius: var(--border-radius);
+}
+.card.horizontal {
+  display: flex;
+  flex-flow: row;
+}
+.card:not(.horizontal) .card-image:first-child {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  overflow: hidden;
+}
+.card.horizontal .card-image:first-child {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+  overflow: hidden;
+}
+.card-content {
+  padding: 1rem;
+}
+
+/* タグ */
+.tags {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.tag {
+  font-size: var(--text-small);
+  border-radius: var(--border-radius);
+  padding: 0.1em 0.75em;
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
+}
+.tag.secondary {
+  background-color: var(--color-secondary);
+  color: #fff;
+}
+.tag.secondary:hover,
+.tag.secondary:focus {
+  background-color: var(--color-secondary-hover);
+}
+
+/* 画像 */
+.image_16x9 {
+  aspect-ratio: 16 / 9;
+}
+.image {
+  width: 100%;
+}
+
+/* テキスト */
+.text-1 {
+  font-size: var(--text-size1);
+  line-height: 1.1;
+}
+.text-2 {
+  font-size: var(--text-size2);
+  line-height: 1.1;
+}
+.text-3 {
+  font-size: var(--text-size3);
+  line-height: 1.15;
+}
+.text-4 {
+  font-size: var(--text-size4);
+  line-height: 1.15;
+}
+.text-5 {
+  font-size: var(--text-size5);
+  line-height: 1.2;
+}
+.text-6 {
+  font-size: var(--text-size6);
+  line-height: 1.2;
+}
+.text-small {
+  font-size: var(--text-small);
+}
+
+.clampLine-4 {
+  max-height: 6em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+/* hr */
+hr {
+  background-color: #eee;
+  border: none;
+  display: block;
+  height: 1px;
+  margin: 0.7rem 0;
 }

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/bulma-1.0.1/css/bulma.min.css" />
     <link
       rel="stylesheet"
       href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
@@ -13,6 +12,7 @@
       rel="stylesheet"
       href="assets/fontawesome-6.5.2/css/regular.min.css"
     />
+    <link rel="stylesheet" href="common/reset.css" />
     <link rel="stylesheet" href="common/base.css" />
     <link rel="stylesheet" href="design.css" />
     <style>
@@ -21,99 +21,89 @@
       }
     </style>
   </head>
-  <body class="has-navbar-fixed-top">
+  <body class="body">
     <!-- ↓ナビバー -->
-    <nav
-      class="navbar is-primary is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="#">Test mock</a>
-
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navMenu"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+    <nav class="navbar">
+      <div>
+        <span class="navbar-item"> Test mock </span>
       </div>
-      <div class="navbar-menu" id="navMenu">
-        <div class="navbar-start">
-          <a class="navbar-item has-text-weight-bold" href="./design.html">
-            レク企画
-          </a>
-          <a class="navbar-item" href="./search.html"> レク検索 </a>
-        </div>
+      <div>
+        <a class="navbar-item active" href="./design.html"> レク企画 </a>
+      </div>
+      <div>
+        <a class="navbar-item" href="./search.html"> レク検索 </a>
       </div>
     </nav>
     <!-- ↑ナビバー -->
-    <article class="_hContainer">
+    <article id="app" v-cloak>
       <!-- ↓サイドバー -->
-      <div class="_sidebar">
-        <aside class="menu">
-          <p class="menu-label">レクリエーション企画</p>
-          <button class="button is-primary">新規作成</button>
-          <hr />
-          <ul class="menu-list">
-            <li><a>レクリエーション1</a></li>
-            <li><a class="is-active">レクリエーション2</a></li>
-            <li><a>レクリエーション3</a></li>
-            <li><a>レクリエーション4</a></li>
-          </ul>
-        </aside>
-      </div>
+      <aside class="sidebar">
+        <button class="button primary">レク企画を新規作成</button>
+        <hr />
+        <div class="recList">
+          <a href="#" class="recList-item">レクリエーション企画1</a>
+          <a href="#" class="recList-item active">レクリエーション企画2</a>
+          <a href="#" class="recList-item">レクリエーション企画3</a>
+          <a href="#" class="recList-item">レクリエーション企画4</a>
+        </div>
+      </aside>
       <!-- ↑サイドバー -->
       <!-- ↓メインコンテンツ -->
-      <main class="_main" id="app" v-cloak>
+      <main class="main">
         <!-- 現在のレクリエーション -->
-        <div class="_hContainer card" v-for="(article, index) in articles">
-          <div class="_moveButtonGroup is-size-4">
-            <div class="_moveButton" v-bind:class="{enabled:0 &lt; index}">
-              <i class="fa-solid fa-chevron-up"></i>
+        <div class="currentRec">
+          <div class="currentRec-item" v-for="(article, index) in articles">
+            <div class="card horizontal">
+              <div class="moveButtonGroup">
+                <button
+                  class="moveButton"
+                  v-bind:class="{enabled:0 &lt; index}"
+                >
+                  <i class="fa-solid fa-chevron-up"></i>
+                </button>
+                <div>{{index + 1}}</div>
+                <button
+                  class="moveButton"
+                  v-bind:class="{enabled:index &lt; articles.length-1}"
+                >
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div class="card-image">
+                <figure class="image_16x9">
+                  <a
+                    v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><img
+                      class="image"
+                      v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
+                      alt="YouTube"
+                  /></a>
+                </figure>
+              </div>
+              <div class="card-content vBetweenSpace">
+                <div>
+                  <h4 class="text-4">{{article.title}}</h4>
+                  <h7 class="text-small">
+                    {{article.publishedAt}}
+                    <i class="fa-solid fa-heart" style="margin-left: 1rem"></i>
+                    {{article.likeCount.toLocaleString()}}
+                    <i class="fa-solid fa-eye" style="margin-left: 1rem"></i>
+                    {{article.viewCount.toLocaleString()}}
+                  </h7>
+                  <div class="tags">
+                    <button class="tag secondary" v-for="tag in article.tags">
+                      {{ tag.group }}:{{ tag.name }}
+                    </button>
+                  </div>
+                </div>
+                <div class="clampLine-4">{{article.description}}</div>
+              </div>
+              <button class="trashButton">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
             </div>
-            <div class="">{{index + 1}}</div>
-            <div
-              class="_moveButton"
-              v-bind:class="{enabled:index &lt; articles.length-1}"
-            >
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-          </div>
-          <figure class="image is-16by9" style="width: 20rem; flex-shrink: 0">
-            <a
-              v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><img
-                v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
-                alt="YouTube"
-            /></a>
-          </figure>
-          <div class="p-3" style="flex-grow: 1">
-            <h4 class="is-size-4">{{article.title}}</h4>
-            <h7 class="is-size-6">
-              {{article.publishedAt}}
-              <i class="fa-solid fa-heart ml-4"></i>
-              {{article.likeCount.toLocaleString()}}
-              <i class="fa-solid fa-eye ml-4"></i>
-              {{article.viewCount.toLocaleString()}}
-            </h7>
-            <div>
-              <span class="tag is-link mr-1" v-for="tag in article.tags"
-                >{{ tag.group }}:{{ tag.name }}</span
-              >
-            </div>
-            <div class="_description">{{article.description}}</div>
-          </div>
-          <div class="_trashButton is-size-4 p-4">
-            <i class="fa-regular fa-trash-can"></i>
           </div>
         </div>
       </main>
