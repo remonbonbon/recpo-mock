@@ -24,15 +24,19 @@
     60%
   );
 
-  --color-link-h: 102deg;
-  --color-link-s: 40%;
-  --color-link-l: 60%;
-  --color-link: hsl(
-    var(--color-link-h),
-    var(--color-link-s),
-    var(--color-link-l)
+  --color-secondary-h: 102deg;
+  --color-secondary-s: 40%;
+  --color-secondary-l: 60%;
+  --color-secondary: hsl(
+    var(--color-secondary-h),
+    var(--color-secondary-s),
+    var(--color-secondary-l)
   );
-  --color-link-hover: hsl(var(--color-link-h), var(--color-link-s), 45%);
+  --color-secondary-hover: hsl(
+    var(--color-secondary-h),
+    var(--color-secondary-s),
+    45%
+  );
 
   --color-danger-h: 348deg;
   --color-danger-s: 100%;
@@ -178,11 +182,11 @@ a.navbar-item:hover {
 .input:focus,
 .select:focus {
   outline: none;
-  border-color: var(--color-link);
+  border-color: var(--color-secondary);
   box-shadow: hsla(
-      var(--color-link-h),
-      var(--color-link-s),
-      var(--color-link-l),
+      var(--color-secondary-h),
+      var(--color-secondary-s),
+      var(--color-secondary-l),
       0.25
     )
     0 0 0 3px;
@@ -226,6 +230,30 @@ input[type="checkbox"] {
 }
 .card-content {
   padding: 1rem;
+}
+
+/* タグ */
+.tags {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.tag {
+  font-size: var(--text-small);
+  border-radius: var(--border-radius);
+  padding: 0.1em 0.75em;
+  cursor: pointer;
+
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
+}
+.tag.secondary {
+  background-color: var(--color-secondary);
+  color: #fff;
+}
+.tag.secondary:hover {
+  background-color: var(--color-secondary-hover);
 }
 
 /* 画像 */

@@ -129,9 +129,9 @@
                     <i class="fa-solid fa-eye" style="margin-left: 1rem"></i>
                     {{article.viewCount.toLocaleString()}}
                   </h7>
-                  <div>
+                  <div class="tags">
                     <a
-                      class="tag is-link mr-1"
+                      class="tag secondary"
                       v-for="tag in article.tags"
                       @click="toggleSearchTag(tag)"
                       >{{ tag.group }}:{{ tag.name }}</a
