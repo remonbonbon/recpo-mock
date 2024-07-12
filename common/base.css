@@ -160,7 +160,7 @@ a.navbar-item:focus {
   background-color: var(--color-primary-hover);
 }
 
-@media screen and (max-width: 1768px) {
+@media screen and (max-width: 768px) {
   :root {
     --sidebar-width: 0;
   }
@@ -293,19 +293,6 @@ input[type="checkbox"] {
   box-shadow: 0 0.5em 1em -0.125em hsla(0, 15%, 5%, 0.1),
     0 0px 0 1px hsla(0, 15%, 5%, 0.02);
   border-radius: var(--border-radius);
-}
-.card.horizontal {
-  display: flex;
-  flex-flow: row;
-}
-.card:not(.horizontal) .card-image:first-child {
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  overflow: hidden;
-}
-.card.horizontal .card-image:first-child {
-  border-top-left-radius: var(--border-radius);
-  border-bottom-left-radius: var(--border-radius);
   overflow: hidden;
 }
 .card-content {

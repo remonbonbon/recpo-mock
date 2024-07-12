@@ -61,7 +61,7 @@
         <!-- 現在のレクリエーション -->
         <div class="currentRec">
           <div class="currentRec-item" v-for="(article, index) in articles">
-            <div class="card horizontal">
+            <div class="card">
               <div class="moveButtonGroup">
                 <button
                   class="moveButton"
@@ -77,40 +77,45 @@
                   <i class="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
-              <div class="card-image">
-                <figure class="image_16x9">
-                  <a
-                    v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    ><img
-                      class="image"
-                      v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
-                      alt="YouTube"
-                  /></a>
-                </figure>
-              </div>
-              <div class="card-content vBetweenSpace">
-                <div>
-                  <h4 class="text-4">{{article.title}}</h4>
-                  <h7 class="text-small">
-                    {{article.publishedAt}}
-                    <i class="fa-solid fa-heart" style="margin-left: 1rem"></i>
-                    {{article.likeCount.toLocaleString()}}
-                    <i class="fa-solid fa-eye" style="margin-left: 1rem"></i>
-                    {{article.viewCount.toLocaleString()}}
-                  </h7>
-                  <div class="tags">
-                    <button class="tag secondary" v-for="tag in article.tags">
-                      {{ tag.group }}:{{ tag.name }}
-                    </button>
-                  </div>
+              <div class="currentRec-responsive">
+                <div class="card-image">
+                  <figure class="image_16x9">
+                    <a
+                      v-bind:href="`https://www.youtube.com/watch?v=${article.youtubeId}`"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ><img
+                        class="image"
+                        v-bind:src="`https://img.youtube.com/vi/${article.youtubeId}/mqdefault.jpg`"
+                        alt="YouTube"
+                    /></a>
+                  </figure>
                 </div>
-                <div class="clampLine-4">{{article.description}}</div>
+                <div class="card-content vBetweenSpace">
+                  <div>
+                    <h4 class="text-4">{{article.title}}</h4>
+                    <h7 class="text-small">
+                      {{article.publishedAt}}
+                      <i
+                        class="fa-solid fa-heart"
+                        style="margin-left: 1rem"
+                      ></i>
+                      {{article.likeCount.toLocaleString()}}
+                      <i class="fa-solid fa-eye" style="margin-left: 1rem"></i>
+                      {{article.viewCount.toLocaleString()}}
+                    </h7>
+                    <div class="tags">
+                      <button class="tag secondary" v-for="tag in article.tags">
+                        {{ tag.group }}:{{ tag.name }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="clampLine-4">{{article.description}}</div>
+                </div>
+                <button class="trashButton">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
               </div>
-              <button class="trashButton">
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
             </div>
           </div>
         </div>

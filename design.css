@@ -33,12 +33,30 @@
   flex-flow: column;
   gap: 2rem;
 }
+.currentRec-item .card {
+  display: flex;
+  flex-flow: row;
+}
 .currentRec-item .card-image {
   max-width: 25rem;
   flex-shrink: 0;
 }
 .currentRec-item .card-content {
   flex-grow: 1;
+}
+@media screen and (max-width: 1100px) {
+  .currentRec-item .card-image {
+    max-width: 100%;
+  }
+}
+.currentRec-responsive {
+  display: flex;
+  flex-flow: row;
+}
+@media screen and (max-width: 1100px) {
+  .currentRec-responsive {
+    flex-flow: column;
+  }
 }
 
 /* 上下移動ボタン */
@@ -76,12 +94,6 @@
 .moveButton.enabled:focus {
   background-color: var(--color-secondary);
 }
-.moveButton:first-child {
-  border-top-left-radius: var(--border-radius);
-}
-.moveButton:last-child {
-  border-bottom-left-radius: var(--border-radius);
-}
 
 /* 削除ボタン */
 .trashButton {
@@ -99,8 +111,6 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border-top-right-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
 
   font-size: var(--text-size4);
 }
@@ -108,4 +118,10 @@
 .trashButton:focus {
   background-color: var(--color-danger);
   color: #fff;
+}
+@media screen and (max-width: 1100px) {
+  .trashButton {
+    height: 3rem;
+    width: 100%;
+  }
 }
