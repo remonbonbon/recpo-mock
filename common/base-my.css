@@ -1,0 +1,152 @@
+:root {
+  --font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ,
+    Meiryo, "ＭＳ Ｐゴシック", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-weight-bold: 600;
+
+  --navbar-height: 2.5rem;
+  --navbar-z: 1000;
+  --sidebar-width: 20rem;
+
+  --color-text: #333;
+  --color-bg: #f6f6f0;
+
+  --color-primary-h: 40deg;
+  --color-primary-s: 100%;
+  --color-primary-l: 78%;
+  --color-primary: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    var(--color-primary-l)
+  );
+  --color-primary-hover: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    60%
+  );
+
+  --color-link-h: 102deg;
+  --color-link-s: 40%;
+  --color-link-l: 60%;
+  --color-link: hsl(
+    var(--color-link-h),
+    var(--color-link-s),
+    var(--color-link-l)
+  );
+  --color-link-hover: hsl(var(--color-link-h), var(--color-link-s), 45%);
+
+  --border-radius: 1rem;
+  --border-color: #ddd;
+
+  --transition-duration: 300ms;
+}
+
+a {
+  text-decoration: none;
+}
+
+.body {
+  padding-top: var(--navbar-height);
+  padding-left: var(--sidebar-width);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
+  line-height: 1.5rem;
+}
+
+/* ナビバー */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--navbar-z);
+  height: var(--navbar-height);
+
+  display: flex;
+
+  background-color: var(--color-primary);
+}
+.navbar-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  padding: 0 1rem;
+}
+a.navbar-item:hover {
+  background-color: var(--color-primary-hover);
+}
+.navbar-item.active {
+  font-weight: var(--font-weight-bold);
+}
+
+/* サイドバー */
+.sidebar {
+  width: var(--sidebar-width);
+  height: calc(100% - var(--navbar-height));
+
+  padding: 1rem;
+
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  overflow-y: scroll;
+}
+
+/* メインコンテンツ */
+.main {
+  width: 100%;
+  height: 100%;
+
+  padding: 1rem 1rem 0 1rem;
+}
+
+/* ボタン */
+.button {
+  border: 0 solid transparent;
+  border-radius: var(--border-radius);
+
+  padding: 0.5em 0.75em;
+  cursor: pointer;
+
+  transition-duration: var(--transition-duration);
+  transition-property: background-color, border-color, box-shadow, color;
+}
+.button.primary {
+  background-color: var(--color-primary);
+}
+.button.primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* コントロール */
+.input,
+.select {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+
+  transition-duration: var(--transition-duration);
+  transition-property: background-color, border-color, box-shadow, color;
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--color-link);
+  box-shadow: hsla(
+      var(--color-link-h),
+      var(--color-link-s),
+      var(--color-link-l),
+      0.25
+    )
+    0 0 0 3px;
+}
+.input {
+  width: 100%;
+  padding: 0.5em 0.75em;
+}
+.select {
+  padding: 0.25em 0.5em;
+}
+label {
+  cursor: pointer;
+}

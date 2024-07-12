@@ -1,0 +1,82 @@
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+._search-controlls .control {
+  margin-left: 0.5rem;
+}
+
+._collapse ._collapse-summary {
+  cursor: pointer;
+  border-radius: var(--bulma-control-radius);
+  background-color: var(--bulma-border);
+
+  display: inline-flex;
+  width: 100%;
+}
+._collapse:not([open]) ._collapse-summary {
+  border: 1px solid;
+  border-color: var(--bulma-border);
+}
+._collapse[open] {
+  border: 1px solid;
+  border-color: var(--bulma-border);
+  border-radius: var(--bulma-control-radius);
+}
+._collapse[open] ._collapse-summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  padding-bottom: 1px; /* borderの太さぶん */
+}
+._collapse-summaryIcon-open,
+._collapse-summaryIcon-close {
+  margin-left: 0.5rem;
+}
+._collapse[open] ._collapse-summaryIcon-close {
+  display: none;
+}
+._collapse-summaryIcon-open {
+  display: none;
+}
+._collapse[open] ._collapse-summaryIcon-open {
+  display: inline;
+}
+._collapse-summaryTitle {
+  margin-left: 0.5rem;
+}
+._collapse-details {
+  padding: 0 0.1rem 0.2rem 0.1rem;
+}
+
+/* 一覧 */
+.articlesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 1rem;
+}
+.articlesList-item {
+  max-width: 25rem;
+}
+._article-description {
+  max-height: 6em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+._article-actions {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+}
+._article-actions ._favButton {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+._article-actions ._favButton:hover {
+  color: var(--bulma-danger);
+}
