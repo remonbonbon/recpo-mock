@@ -48,12 +48,18 @@
   );
   --color-danger-hover: hsl(var(--color-danger-h), var(--color-danger-s), 60%);
 
-  --border-radius: 1rem;
+  --border-radius: 0.75rem;
   --border-color: #ddd;
-  --border-color-dark: #bbb;
 
   --transition-duration: 300ms;
   --control-placeholder: #aaa;
+  --focus-shadow: hsla(
+      var(--color-secondary-h),
+      var(--color-secondary-s),
+      var(--color-secondary-l),
+      0.4
+    )
+    0 0 0 5px;
 
   --text-size6: 1rem;
   --text-size5: calc(var(--text-size6) * 1.2);
@@ -103,7 +109,8 @@ a {
   transition-duration: var(--transition-duration);
   transition-property: background-color;
 }
-a.navbar-item:hover {
+a.navbar-item:hover,
+a.navbar-item:focus {
   background-color: var(--color-primary-hover);
 }
 .navbar-item.active {
@@ -145,6 +152,7 @@ a.navbar-item:hover {
 
 /* ボタン */
 .button {
+  outline: none;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
 
@@ -157,7 +165,8 @@ a.navbar-item:hover {
 .button.primary {
   background-color: var(--color-primary);
 }
-.button.primary:hover {
+.button.primary:hover,
+.button.primary:focus {
   background-color: var(--color-primary-hover);
 }
 .button.danger.outline {
@@ -165,8 +174,8 @@ a.navbar-item:hover {
   color: var(--color-danger);
   border-color: var(--color-danger);
 }
-.button.danger.outline:hover {
-  /* color: var(--color-danger); */
+.button.danger.outline:hover,
+.button.danger.outline:focus {
   outline: 1px solid var(--color-danger-hover);
 }
 
@@ -183,13 +192,7 @@ a.navbar-item:hover {
 .select:focus {
   outline: none;
   border-color: var(--color-secondary);
-  box-shadow: hsla(
-      var(--color-secondary-h),
-      var(--color-secondary-s),
-      var(--color-secondary-l),
-      0.25
-    )
-    0 0 0 3px;
+  box-shadow: var(--focus-shadow);
 }
 ::placeholder {
   color: var(--control-placeholder);
@@ -206,10 +209,25 @@ label {
   cursor: pointer;
 }
 input[type="checkbox"] {
-  margin-right: 0.5rem;
+  margin-right: 0.2rem;
+}
+.checkboxes {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
 }
 .checkbox {
   display: inline-block;
+  font-size: 0.9rem;
+
+  border-radius: var(--border-radius);
+  transition-duration: var(--transition-duration);
+  transition-property: border-color, box-shadow;
+}
+.checkbox:hover,
+.checkbox:has(input[type="checkbox"]:focus) {
+  box-shadow: var(--focus-shadow);
 }
 
 /* コントロールのコンテナ */
@@ -223,9 +241,18 @@ input[type="checkbox"] {
     0 0px 0 1px hsla(0, 15%, 5%, 0.02);
   border-radius: var(--border-radius);
 }
-.card-image {
+.card.horizontal {
+  display: flex;
+  flex-flow: row;
+}
+.card:not(.horizontal) .card-image:first-child {
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
+  overflow: hidden;
+}
+.card.horizontal .card-image:first-child {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
   overflow: hidden;
 }
 .card-content {
@@ -243,6 +270,9 @@ input[type="checkbox"] {
   font-size: var(--text-small);
   border-radius: var(--border-radius);
   padding: 0.1em 0.75em;
+  appearance: none;
+  border: none;
+  outline: none;
   cursor: pointer;
 
   transition-duration: var(--transition-duration);
@@ -252,7 +282,8 @@ input[type="checkbox"] {
   background-color: var(--color-secondary);
   color: #fff;
 }
-.tag.secondary:hover {
+.tag.secondary:hover,
+.tag.secondary:focus {
   background-color: var(--color-secondary-hover);
 }
 
@@ -304,7 +335,7 @@ input[type="checkbox"] {
 
 /* hr */
 hr {
-  background-color: var(--border-color);
+  background-color: #eee;
   border: none;
   display: block;
   height: 1px;

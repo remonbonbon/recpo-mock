@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link rel="stylesheet" href="assets/bulma-1.0.1/css/bulma.min.css" /> -->
     <link
       rel="stylesheet"
       href="assets/fontawesome-6.5.2/css/fontawesome.min.css"
@@ -38,7 +37,7 @@
     <!-- ↑ナビバー -->
     <article id="app" v-cloak>
       <!-- ↓サイドバー -->
-      <div class="sidebar">
+      <aside class="sidebar">
         <div class="control">
           <input
             class="input"
@@ -73,7 +72,7 @@
                 ></span>
                 <span class="collapse-summaryTitle">{{ group }}</span>
               </summary>
-              <div class="collapse-details">
+              <div class="collapse-details checkboxes">
                 <div class="checkbox" v-for="tag in tagsByGroup[group]">
                   <label>
                     <input
@@ -93,7 +92,7 @@
             検索条件をリセット
           </button>
         </div>
-      </div>
+      </aside>
       <!-- ↑サイドバー -->
       <!-- ↓メインコンテンツ -->
       <main class="main">
@@ -130,19 +129,20 @@
                     {{article.viewCount.toLocaleString()}}
                   </h7>
                   <div class="tags">
-                    <a
+                    <button
                       class="tag secondary"
                       v-for="tag in article.tags"
                       @click="toggleSearchTag(tag)"
-                      >{{ tag.group }}:{{ tag.name }}</a
                     >
+                      {{ tag.group }}:{{ tag.name }}
+                    </button>
                   </div>
                 </div>
                 <div class="clampLine-4">{{article.description}}</div>
                 <div class="articleActions">
-                  <span class="favButton"
-                    ><i class="fa-regular fa-heart"></i
-                  ></span>
+                  <button class="favButton">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
                   <button class="button primary">レク企画に追加</button>
                 </div>
               </div>

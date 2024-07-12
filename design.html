@@ -75,13 +75,13 @@
         <!-- 現在のレクリエーション -->
         <div class="_hContainer card" v-for="(article, index) in articles">
           <div class="_moveButtonGroup is-size-4">
-            <div class="_moveButton" v-bind:class="{enabled:0 < index}">
+            <div class="_moveButton" v-bind:class="{enabled:0 &lt; index}">
               <i class="fa-solid fa-chevron-up"></i>
             </div>
             <div class="">{{index + 1}}</div>
             <div
               class="_moveButton"
-              v-bind:class="{enabled:index < articles.length-1}"
+              v-bind:class="{enabled:index &lt; articles.length-1}"
             >
               <i class="fa-solid fa-chevron-down"></i>
             </div>

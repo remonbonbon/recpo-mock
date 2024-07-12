@@ -5,7 +5,7 @@
 .collapse-summary {
   cursor: pointer;
   border-radius: var(--border-radius);
-  background-color: var(--border-color);
+  background-color: transparent;
   transition-duration: var(--transition-duration);
   transition-property: background-color;
 
@@ -13,7 +13,7 @@
   width: 100%;
 }
 .collapse-summary:hover {
-  background-color: var(--border-color-dark);
+  background-color: var(--border-color);
 }
 .collapse:not([open]) .collapse-summary {
   border: 1px solid;
@@ -73,9 +73,15 @@
   align-items: center;
 }
 .favButton {
-  font-size: 1.5em;
+  appearance: none;
+  border: none;
+  outline: none;
   cursor: pointer;
+  background-color: transparent;
+
+  font-size: 1.5em;
 }
-.favButton:hover {
+.favButton:hover,
+.favButton:focus {
   color: var(--color-danger);
 }
