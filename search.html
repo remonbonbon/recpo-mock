@@ -37,7 +37,15 @@
     <!-- ↑ナビバー -->
     <article id="app" v-cloak>
       <!-- ↓サイドバー -->
-      <aside class="sidebar">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebarToggler" id="sidebarToggler">
+          <button
+            class="sidebarToggler-button"
+            @click="toggleSidebar('#sidebar,#sidebarToggler')"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
         <div class="control">
           <input
             class="input"

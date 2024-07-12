@@ -5,7 +5,10 @@
 
   --navbar-height: 2.5rem;
   --navbar-z: 1000;
-  --sidebar-width: 20rem;
+  --sidebar-width-original: 20rem;
+  --sidebar-width: var(--sidebar-width-original);
+  --sidebar-togger-top: calc(var(--navbar-height) + 3rem);
+  --sidebar-togger-size: 5rem;
 
   --color-text: hsl(221deg, 14%, 29%);
   --color-bg: #fff;
@@ -119,7 +122,7 @@ a.navbar-item:focus {
 
 /* サイドバー */
 .sidebar {
-  width: var(--sidebar-width);
+  width: var(--sidebar-width-original);
   height: calc(100% - var(--navbar-height));
 
   padding: 1rem;
@@ -128,6 +131,56 @@ a.navbar-item:focus {
   top: var(--navbar-height);
   left: 0;
   overflow-y: scroll;
+  background-color: var(--color-bg);
+}
+
+.sidebarToggler {
+  visibility: hidden;
+
+  position: fixed;
+  top: var(--sidebar-togger-top);
+  left: 0;
+}
+.sidebarToggler-button {
+  width: calc(var(--sidebar-togger-size) / 2);
+  height: var(--sidebar-togger-size);
+  border-radius: 0 100% 100% 0% / 50%;
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary-hover);
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
+}
+.sidebarToggler-button:hover,
+.sidebarToggler-button:focus {
+  background-color: var(--color-primary-hover);
+}
+
+@media screen and (max-width: 1768px) {
+  :root {
+    --sidebar-width: 0;
+  }
+  .sidebar {
+    left: calc(0px - var(--sidebar-width-original));
+    transition-duration: var(--transition-duration);
+    transition-property: left;
+  }
+  .sidebar.open {
+    left: 0;
+    visibility: visible;
+  }
+  .sidebarToggler {
+    visibility: visible;
+    transition-duration: var(--transition-duration);
+    transition-property: left;
+  }
+  .sidebarToggler.open {
+    left: var(--sidebar-width-original);
+  }
 }
 
 /* メインコンテンツ */

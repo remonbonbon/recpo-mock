@@ -63,5 +63,10 @@ createApp({
         this.selectedTags.push(tag);
       }
     },
+    toggleSidebar(selector) {
+      for (const elem of document.querySelectorAll(selector)) {
+        elem?.classList?.toggle("open");
+      }
+    },
   },
 }).mount("#app");
