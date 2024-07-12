@@ -55,5 +55,13 @@ createApp({
       this.sortOption = "latest";
       this.searchWord = "";
     },
+    toggleSearchTag(tag) {
+      // すでにある場合、削除
+      const removedTags = _.remove(this.selectedTags, (t) => t.id === tag.id);
+      if (0 === removedTags.length) {
+        // 無かった場合、追加
+        this.selectedTags.push(tag);
+      }
+    },
   },
 }).mount("#app");
